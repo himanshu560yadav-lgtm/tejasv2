@@ -239,7 +239,8 @@ class MainActivity : BaseNavigationActivity() {
 
     override fun onStart() {
         super.onStart()
-        if (auth.currentUser == null) {
+        // Skip login check - for development/testing
+        if (false && auth.currentUser == null) {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
             return

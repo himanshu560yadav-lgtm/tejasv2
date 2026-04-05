@@ -375,8 +375,8 @@ class SettingsActivity : BaseNavigationActivity() {
         getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).edit().clear().apply()
 
 
-        // Restart the app by navigating to the onboarding screen
-        val intent = Intent(this, LoginActivity::class.java)
+        // Restart the app by navigating to the main screen (skip login for dev)
+        val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
