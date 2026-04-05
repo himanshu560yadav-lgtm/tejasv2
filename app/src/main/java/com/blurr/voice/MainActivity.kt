@@ -124,13 +124,15 @@ class MainActivity : BaseNavigationActivity() {
         val currentUser = auth.currentUser
         val profileManager = UserProfileManager(this)
 
-        if (currentUser == null || !profileManager.isProfileComplete()) {
+        // Skip login check - for development/testing
+        if (false && (currentUser == null || !profileManager.isProfileComplete())) {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
             return
         }
         onboardingManager = OnboardingManager(this)
-        if (!onboardingManager.isOnboardingCompleted()) {
+        // Skip onboarding - for development/testing
+        if (false && !onboardingManager.isOnboardingCompleted()) {
             Logger.d("MainActivity", "User is logged in but onboarding not completed. Relaunching permissions stepper.")
             startActivity(Intent(this, OnboardingPermissionsActivity::class.java))
             finish()
