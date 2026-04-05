@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "738454515887",
+    "project_id": "tejas-ai-a777b",
+    "storage_bucket": "tejas-ai-a777b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:738454515887:android:8e867185ca88c37e67245a",
+        "android_client_info": {
+          "package_name": "com.blurr.voice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "738454515887-rpj0jbr2edlujjq8ficnvv5gak9t2d2l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvamCwPVpCujnYANOn_90tCNwsRB6tASU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "738454515887-rpj0jbr2edlujjq8ficnvv5gak9t2d2l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
