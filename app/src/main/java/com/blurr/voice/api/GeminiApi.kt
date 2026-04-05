@@ -32,8 +32,10 @@ import java.util.concurrent.TimeUnit
  * and logs all requests and responses to a persistent file.
  */
 object GeminiApi {
-    private val proxyUrl: String = BuildConfig.GCLOUD_PROXY_URL
+    private val proxyUrl: String = BuildConfig.GCLOUD_PROXY_URL.ifEmpty { "https://generativelanguage.googleapis.com/v1beta/models" }
     private val proxyKey: String = BuildConfig.GCLOUD_PROXY_URL_KEY
+    private val customLlmUrl: String = BuildConfig.CUSTOM_LLM_URL
+    private val customLlmKey: String = BuildConfig.CUSTOM_LLM_KEY
 
     private val client = OkHttpClient.Builder()
         .connectTimeout(30, TimeUnit.SECONDS)
@@ -87,12 +89,26 @@ object GeminiApi {
             Log.d("GeminiApi", "Payload: ${payload.toString().take(500)}...")
 
             try {
-                val request = Request.Builder()
-                    .url(proxyUrl)
+                // Use custom LLM URL if provided (e.g., NVIDIA), otherwise use proxy
+                val actualUrl = if (customLlmUrl.isNotEmpty()) {
+                    "$customLlmUrl/$modelName:generateContent?key=$currentApiKey"
+                } else {
+                    proxyUrl
+                }
+                
+                val requestBuilder = Request.Builder()
+                    .url(actualUrl)
                     .post(payload.toString().toRequestBody("application/json".toMediaType()))
                     .addHeader("Content-Type", "application/json")
-                    .addHeader("X-API-Key", proxyKey)
-                    .build()
+                
+                // Add appropriate headers based on URL
+                if (customLlmUrl.isNotEmpty()) {
+                    requestBuilder.addHeader("Authorization", "Bearer $currentApiKey")
+                } else {
+                    requestBuilder.addHeader("X-API-Key", proxyKey)
+                }
+                
+                val request = requestBuilder.build()
 
                 val requestStartTime = System.currentTimeMillis()
                 client.newCall(request).execute().use { response ->

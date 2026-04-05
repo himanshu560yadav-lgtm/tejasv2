@@ -43,6 +43,9 @@ android {
     val googlecloudProxyURLKey = localProperties.getProperty("GCLOUD_PROXY_URL_KEY") ?: ""
     val revenueCatSDK = localProperties.getProperty("REVENUE_CAT_PUBLIC_URL") ?: ""
     val revenueCatApiKey = localProperties.getProperty("REVENUECAT_API_KEY") ?: ""
+    // Custom LLM endpoint (for NVIDIA or other APIs)
+    val customLlmUrl = localProperties.getProperty("CUSTOM_LLM_URL") ?: ""
+    val customLlmKey = localProperties.getProperty("CUSTOM_LLM_KEY") ?: ""
 
     val debugSha1 = "D0:A1:49:03:FD:B5:37:DF:B5:36:51:B1:66:AE:70:11:E2:59:08:33"
 
@@ -71,6 +74,8 @@ android {
         buildConfigField("String", "GCLOUD_GATEWAY_URL", "\"$googlecloudGatewayURL\"")
         buildConfigField("String", "GCLOUD_PROXY_URL", "\"$googlecloudProxyURL\"")
         buildConfigField("String", "GCLOUD_PROXY_URL_KEY", "\"$googlecloudProxyURLKey\"")
+        buildConfigField("String", "CUSTOM_LLM_URL", "\"$customLlmUrl\"")
+        buildConfigField("String", "CUSTOM_LLM_KEY", "\"$customLlmKey\"")
         buildConfigField("boolean", "ENABLE_LOGGING", "true")
 
     }

@@ -50,8 +50,10 @@ class GeminiApi(
         private val JSON_MEDIA_TYPE = "application/json; charset=utf-8".toMediaType()
     }
 
-    private val proxyUrl: String = BuildConfig.GCLOUD_PROXY_URL
+    private val proxyUrl: String = BuildConfig.GCLOUD_PROXY_URL.ifEmpty { "https://generativelanguage.googleapis.com/v1beta/models" }
     private val proxyKey: String = BuildConfig.GCLOUD_PROXY_URL_KEY
+    private val customLlmUrl: String = BuildConfig.CUSTOM_LLM_URL
+    private val customLlmKey: String = BuildConfig.CUSTOM_LLM_KEY
 
     private val httpClient = OkHttpClient()
 
